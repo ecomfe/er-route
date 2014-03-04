@@ -25,6 +25,8 @@ define(
             };
 
             controller.findActionConfig = function (actionContext) {
+                var candidate = null;
+
                 var path = actionContext.url.getPath();
                 for (var i = 0; i < actionConfigList.length; i++) {
                     var actionConfig = actionConfigList[i];
@@ -32,14 +34,19 @@ define(
                     var match = compile(actionConfig.path);
                     var args = match(path);
                     if (args) {
-                        // 把URL中提取出来的参数加上
-                        var config = util.mix({}, actionConfig);
-                        config.args = util.mix({}, config.args, args);
-                        return config;
+                        candidate = util.mix({}, actionConfig);
+                        // 加上从URL里提取的参数
+                        candidate.args = util.mix({}, candidate.args, args);
+
+                        // 如果没有权限，则把当前的作为候选继续往下找，如果下面能找到有权限的就用，没有的话就用这个让系统返回无权限页
+                        var hasAuthority = controller.checkAuthority(candidate, actionContext);
+                        if (hasAuthority) {
+                            break;
+                        }
                     }
                 }
 
-                return null;
+                return candidate;
             };
         };
 

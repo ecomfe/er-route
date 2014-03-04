@@ -46,6 +46,17 @@ define(
                 testSingleRoute('/users', 'A');
                 testSingleRoute('/users/123', 'B', { id: '123' });
             });
+
+            it('should fail through if authority is not matched', function () {
+                testSingleRoute('/posts/123', 'E', { id: '123' });
+                var permission = require('er/permission');
+                var isAllow = permission.isAllow;
+                permission.isAllow = function (auth) {
+                    return auth === 'VIEW';
+                };
+                testSingleRoute('/posts/123', 'D', { id: '123' });
+                permission.isAllow = isAllow;
+            });
         });
     }
 );
