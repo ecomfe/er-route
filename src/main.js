@@ -43,6 +43,7 @@ define(
                         // - 真实的URL是`/users~id=123`，配置`movedTo: '/users/${id}'`，会按`/users/123`查询
                         // - 真实的URL是`/users/123`，配置`movedTo: '/users~id=${id}'`，会按`/users~id=123`查询
                         if (candidate.movedTo) {
+                            /* jshint loopfunc: true */
                             candidate.movedTo = candidate.movedTo.replace(
                                 /\$\{(.+?)\}/g,
                                 function (match, key) {
@@ -62,12 +63,13 @@ define(
 
                 return candidate;
             };
-        };
+        }
 
         var enabled = false;
 
         return {
             version: '0.8.0-beta.1',
+
             enable: function () {
                 if (enabled) {
                     return;

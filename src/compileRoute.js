@@ -1,7 +1,7 @@
 /**
  * ER Route
  * Copyright 2013 Baidu Inc. All rights reserved.
- * 
+ *
  * @ignore
  * @file 将URL规则编译为正则的函数
  * @author otakustay
