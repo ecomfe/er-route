@@ -9,6 +9,7 @@
 define(
     function (require) {
         var controller = require('er/controller');
+        var util = require('er/util');
         var compile = require('compileRoute');
 
         var actionConfigList = [];
@@ -29,10 +30,16 @@ define(
                     var actionConfig = actionConfigList[i];
 
                     var match = compile(actionConfig.path);
-                    if (match(path)) {
-                        return actionConfig;
+                    var args = match(path);
+                    if (args) {
+                        // 把URL中提取出来的参数加上
+                        var config = util.mix({}, actionConfig);
+                        config.args = util.mix({}, config.args, args);
+                        return config;
                     }
                 }
+
+                return null;
             };
         };
 
