@@ -38,6 +38,20 @@ define(
                         // 加上从URL里提取的参数
                         candidate.args = util.mix({}, candidate.args, args);
 
+                        // 处理重定向，处理时会把URL的`query`部分和从URL中提取的参数作为数据源，供`movedTo`配置为模板，如：
+                        //
+                        // - 真实的URL是`/users~id=123`，配置`movedTo: '/users/${id}'`，会按`/users/123`查询
+                        // - 真实的URL是`/users/123`，配置`movedTo: '/users~id=${id}'`，会按`/users~id=123`查询
+                        if (candidate.movedTo) {
+                            candidate.movedTo = candidate.movedTo.replace(
+                                /\$\{(.+?)\}/g,
+                                function (match, key) {
+                                    return actionContext.url.getQuery(key) || candidate.args[key];
+                                }
+                            );
+                            break;
+                        }
+
                         // 如果没有权限，则把当前的作为候选继续往下找，如果下面能找到有权限的就用，没有的话就用这个让系统返回无权限页
                         var hasAuthority = controller.checkAuthority(candidate, actionContext);
                         if (hasAuthority) {
