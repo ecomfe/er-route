@@ -8,7 +8,9 @@
         }
     ],
     "dependencies": {
-        "er": ">=3.1.0-alpha.7"
+        "er": ">=3.1.0-alpha.7",
+        "mini-event": "1.x",
+        "etpl": "2.x"
     },
     "main": "main",
     "description": "为ER添加ExpressJS风格的路由功能",
