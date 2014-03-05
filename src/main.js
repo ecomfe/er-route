@@ -10,7 +10,7 @@ define(
     function (require) {
         var controller = require('er/controller');
         var util = require('er/util');
-        var compile = require('compileRoute');
+        var compile = require('./compileRoute');
 
         var actionConfigList = [];
 
@@ -68,7 +68,7 @@ define(
         var enabled = false;
 
         return {
-            version: '0.8.0-beta.1',
+            version: '0.8.0',
 
             enable: function () {
                 if (enabled) {
