@@ -68,7 +68,7 @@ define(
         var enabled = false;
 
         return {
-            version: '0.8.0-beta.1',
+            version: '0.8.0',
 
             enable: function () {
                 if (enabled) {
