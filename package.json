@@ -1,0 +1,19 @@
+{
+    "name": "er-route",
+    "version": "0.8.0-beta.1",
+    "contributors": [
+        {
+            "name": "otakustay",
+            "email": "otakustay@gmail.com"
+        }
+    ],
+    "dependencies": {
+        "er": ">=3.1.0-alpha.7",
+        "mini-event": "1.x",
+        "etpl": "2.x"
+    },
+    "main": "main",
+    "description": "为ER添加ExpressJS风格的路由功能",
+    "homepage": "https://github.com/ecomfe/er-route",
+    "repository": "git://github.com/ecomfe/er-route"
+}
