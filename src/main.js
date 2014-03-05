@@ -10,7 +10,7 @@ define(
     function (require) {
         var controller = require('er/controller');
         var util = require('er/util');
-        var compile = require('compileRoute');
+        var compile = require('./compileRoute');
 
         var actionConfigList = [];
 
